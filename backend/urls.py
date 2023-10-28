@@ -24,5 +24,7 @@ urlpatterns = [
     path('AjaxCreateSkill', AjaxCreateSkill, name='AjaxCreateSkill'),
     path('AjaxCreateOrganization', AjaxCreateOrganization, name='AjaxCreateOrganization'),
     path('AjaxUpdateFood', AjaxUpdateFood, name='AjaxUpdateFood'),
+    path('AjaxUpdateItem', AjaxUpdateItem, name='AjaxUpdateItem'),
+    path('AjaxUpdateFood', AjaxUpdateFood, name='AjaxUpdateFood'),
     
 ]

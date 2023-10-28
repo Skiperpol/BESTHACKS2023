@@ -194,6 +194,29 @@ def food_update(request, foodId):
         context={"form":form, "food_id":food_id}
         )
 
+
+def item_update(request, itemId):
+    item = get_object_or_404(Przedmiot, item_id=itemId)
+    item_id = item.item_id
+    form = FormJedzenie(instance=item)
+
+    return render(
+        request = request,
+        template_name = "frontend/item_update.html",
+        context={"form":form, "item_id":item_id}
+        )
+
+
+def skill_update(request, skillId):
+    skill = get_object_or_404(Usluga, service_id=skillId)
+    skill_id = skill.service_id
+    form = FormJedzenie(instance=skill)
+
+    return render(
+        request = request,
+        template_name = "frontend/skill_update.html",
+        context={"form":form, "skill_id":skill_id}
+        )
 # AJAX
 
 
@@ -307,4 +330,30 @@ def AjaxUpdateFood(request):
     food.food_description = food_description
     food.food_image = food_image
     food.save()
+    return JsonResponse({'msg':'File successfully uploaded'})
+
+def AjaxUpdateItem(request):
+    item_name = request.POST.get('foitem_nameod_name')
+    item_description = request.POST.get('item_description')
+    item_id = request.POST.get('item_id')
+    item_image = request.POST.get('item_image')
+    item = get_object_or_404(Przedmiot, item_id=item_id)
+    item.item_name = item_name
+    item.item_description = item_description
+    item.item_image = item_image
+    item.save()
+    return JsonResponse({'msg':'File successfully uploaded'})
+
+def AjaxUpdateSkill(request):
+    service_name = request.POST.get('service_name')
+    service_description = request.POST.get('service_description')
+    service_id = request.POST.get('service_id')
+    service_price = request.POST.get('service_price')
+    service_image = request.POST.get('service_image')
+    skill = get_object_or_404(Usluga, service_id=service_id)
+    skill.service_name = service_name
+    skill.service_description = service_description
+    skill.service_price = service_price
+    skill.service_image = service_image
+    skill.save()
     return JsonResponse({'msg':'File successfully uploaded'})

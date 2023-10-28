@@ -1,0 +1,46 @@
+{% extends 'frontend/base.html' %}
+{% block events %}
+active
+{% endblock %}
+{% block content %}
+<form method="post" id="update-item">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="main_button">Submit</button>
+</form>
+<script>
+    // Aktualizowanie zlecenia
+  $("#update-item").submit(function (e) {
+    e.preventDefault();
+
+    // Dodawanie wartości
+    var form_data = new FormData();
+    csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+    form_data.append("csrfmiddlewaretoken", csrf_token);
+    form_data.append("item_name", $("#id_item_name").val());
+    form_data.append("item_description", $("#id_item_description").val());
+    form_data.append("item_image", $("#id_item_image").val());
+    form_data.append("item_id", "{{item_id}}");
+
+   
+    // Wysyłanie wartości
+    $.ajax({
+      url: "/AjaxUpdateItem",
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: form_data,
+      type: "POST",
+      success: function (response) {
+        window.location.reload();
+      },
+      error: function (xhr, textStatus, errorThrown) {
+        console.log("Wystąpił błąd podczas aktualizowania zlecenia.");
+        console.log("Status: " + textStatus);
+        console.log("Błąd: " + errorThrown);
+      },
+    });
+  });
+
+</script>
+{% endblock content %}
