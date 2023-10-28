@@ -1,10 +1,15 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model, login, authenticate
-from django.contrib.auth import logout
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from backend.models import CustomUser
+from backend.forms import FormUserRegistration
 from django.template import loader
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth import logout
+
+def is_admin(user):
+    return user.is_superuser
+
 
 def index(request):
     template = loader.get_template("frontend/index.html")
@@ -52,7 +57,16 @@ def fundacje(request):
     }
     return HttpResponse(template.render(context, request))
 
-def login(request):
+
+
+
+
+# UŻYTKOWNIK
+def logout_view(request):
+    logout(request)
+    return redirect('/')
+
+def web_login(request):
     if request.user.is_authenticated:
         return redirect('/')
 
@@ -63,52 +77,41 @@ def login(request):
                 username=form.cleaned_data['username'],
                 password=form.cleaned_data['password'],
             )
+            print(user)
             if user is not None:
                 login(request, user)
-                return redirect('/')
+                return redirect('/login')
 
-        else:
-            for error in list(form.errors.values()):
-                print(request, error)
+    form = AuthenticationForm()
+    form.fields['username'].label = 'Login:'
+    form.fields['password'].label = 'Hasło:'
 
-    form = AuthenticationForm() 
-    
     return render(
         request=request,
-        template_name="frontend/login.html", 
+        template_name="frontend/login.html",
         context={'form': form}
         )
 
-# def login(request):
-#     if request.user.is_authenticated:
-#         return redirect('/')
 
-#     if request.method == 'POST':
-#         form = AuthenticationForm(request=request, data=request.POST)
-#         if form.is_valid():
-#             user = authenticate(
-#                 username=form.cleaned_data['username'],
-#                 password=form.cleaned_data['password'],
-#             )
-#             if user is not None:
-#                 login(request, user)
-#                 return redirect('/')
-
-#         else:
-#             for error in list(form.errors.values()):
-#                 print(request, error)
-
-#     form = AuthenticationForm() 
-
-#     template = loader.get_template("frontend/login.html")
-#     context = {
-#         "lorem": "lorem",
-#     }
-#     return HttpResponse(template.render(context, request))
 
 def register(request):
-    template = loader.get_template("frontend/register.html")
-    context = {
-        "lorem": "lorem",
-    }
-    return HttpResponse(template.render(context, request))
+    form = FormUserRegistration()
+
+    return render(
+        request = request,
+        template_name = "frontend/register.html",
+        context={"form":form}
+        )
+
+
+# def createUser(request):
+#     firstName = request.POST['firstName']
+#     lastName = request.POST['lastName']
+#     username = request.POST['username']
+#     telefon = request.POST['telefon']
+#     email = request.POST['email']
+#     password = request.POST['passwordFirst']
+#     haszPassword = make_password(password)
+#     nowyUser = CustomUser.objects.create(first_name=firstName, last_name=lastName, username=username, telefon=telefon, email=email, password=haszPassword)
+#     nowyUser.save()
+#     return HttpResponse('Stworzono nowego użytkownika')

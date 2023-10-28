@@ -1,13 +1,62 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
 Login 
-<form class="login-form" method="post">
+<form method="post" id="login-form">
+    {% csrf_token %}
+    <div class="form-group">
+      {{form.username.label}}<br />
+      {{ form.username }}
+    </div>
+    <div class="form-group">
+      {{form.password.label}}<br />
+      {{ form.password }}
+    </div>
+    <div class="button_content">
+      <button type="submit" class="button">ZALOGUJ</button>
+    </div>
+  </form>
+<!-- <form class="login-form" method="post">
     {% csrf_token %}
     {{form.as_p}}
-    <button type="submit" class="main_button">Zaloguj</button>
-</form>
+    <button type="submit" class="defaultbutton">Zaloguj</button>
+</form> -->
+<div class="main_button">
+    Zaloguj się
+</div>
 nie masz konta frajerze?
 <div class="green_text">
     <a class="green_text" href="{% url 'register' %}">zarejestruj się</a>
 </div>
+<button>
+    <a href="{% url 'logout' %}"><h2>Wyloguj</h2></a>
+  </button>
+<script>
+    $(document).ready(function () {
+        $('#login-form').on('submit', function(e) {
+        console.log("1231231")
+            e.preventDefault();
+
+            // var form = $(this);
+
+            $.ajax({
+                // type: form.attr('method'),
+                // url: form.attr('action'),
+                // data: form.serialize(),
+                type: 'POST',
+                url: '/login/',  // Adres URL do widoku logowania
+                data: $(this).serialize(),
+                success: function (data) {
+                    if (data.error) {
+                        // Wyświetl komunikat na stronie
+                        $('#error-message').html(data.error).show();
+                        console.log("testk")
+                    } else {
+                        console.log("UDAŁO SIĘ")
+                        // window.location.href = '/';
+                    }
+                }
+            });
+        });
+    });
+</script>
 {% endblock content %}
