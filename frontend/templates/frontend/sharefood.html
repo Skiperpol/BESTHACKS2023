@@ -13,8 +13,13 @@ Share your food !!!
     {{ form.as_p }}
     <button type="submit" class="main_button">Submit</button>
 </form>
-<<<<<<< HEAD
-
+{% else %}
+{% for jedzen in jedzenie %}
+{{ jedzen }}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% endblock content %}
 <script>
     $(document).on('submit','#create-food',function(e){
     e.preventDefault();
@@ -53,12 +58,3 @@ Share your food !!!
     });
   });
 </script>
-=======
-{% else %}
-{% for jedzen in jedzenie %}
-{{ jedzen }}
-{% endfor %}
-{% endif %}
-{% endif %}
->>>>>>> d0e23902dc69f81032829e74e570c52bd5d671bb
-{% endblock content %}
