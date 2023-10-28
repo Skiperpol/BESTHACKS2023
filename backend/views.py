@@ -32,7 +32,8 @@ def sharefood(request):
         return render(request, 'frontend/sharefood.html', {'jedzenie': jedzenie, 'rola': rola})
     elif rola == 'WOLONTARIUSZ':
         form = FormJedzenie()
-        return render(request, 'frontend/sharefood.html', {'form': form, 'rola': rola})
+        dodane_jedzenie = user.jedzenie.all()
+        return render(request, 'frontend/sharefood.html', {'form': form, 'rola': rola, 'dodane_jedzenie': dodane_jedzenie})
     else:
         pass
     
@@ -185,6 +186,7 @@ def AjaxCreateFood(request):
     user = request.user
     food = Jedzenie.objects.create(uzytkownik=user.email, food_name=food_name, food_description=food_description, food_image=food_image)
     food.save()
+    print(user.jedzenie)
     user.jedzenie.add(food)
     return JsonResponse({'msg':'File successfully uploaded'})
 
