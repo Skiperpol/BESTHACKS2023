@@ -4,9 +4,48 @@
 Share your food !!!
 {% endif %}
 
-<form method="post">
+<form method="post" id="create-food">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="main_button">Submit</button>
 </form>
+
+<script>
+    $(document).on('submit','#create-food',function(e){
+    e.preventDefault();
+
+    // const exportProgress = document.getElementById('exportProgress');
+    // // Dodawanie plików
+    var form_data = new FormData();
+    // var ins = document.getElementById('id_zalacznikPubliczne').files.length;
+    // console.log(ins)
+    // for (var x = 0; x < ins; x++) {
+    //   form_data.append("files[]", document.getElementById('id_zalacznikPubliczne').files[x]);
+    // }
+
+    csrf_token = $('input[name="csrfmiddlewaretoken"]').val();      
+    form_data.append("csrfmiddlewaretoken", csrf_token);
+    form_data.append("food_name", $('#id_food_name').val());
+    form_data.append("food_description", $('#id_food_description').val());
+    form_data.append("food_image", $('#id_food_image').val());
+
+    // Wysyłanie plików
+    $.ajax({
+      url: '/AjaxCreateFood',
+      dataType: 'json',
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: form_data,
+      type: 'post',
+      success: function (response) {
+        console.log("Stworzono nowe zlecenie")
+        // window.location.href = '/home';
+      },
+      error: function (response) {
+        console.log("Wystąpił błąd podczas tworzenia zlecenia.");
+      }
+    });
+  });
+</script>
 {% endblock content %}

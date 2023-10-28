@@ -80,18 +80,21 @@ class FormEventCreate(forms.ModelForm):
     # image = forms.FileField(label='Zdjęcia dodatkowe', required=False, validators=[file_size], widget=forms.ClearableFileInput(attrs={'multiple': True}))
 
 class FormJedzenie(forms.ModelForm):
+    food_image = forms.ImageField(required=False)
     class Meta:
         model = Jedzenie
         fields = ['food_name', 'food_description', 'food_image']
 
 
 class FormPrzedmiot(forms.ModelForm):
+    item_image = forms.ImageField(required=False)
     class Meta:
         model = Przedmiot
         fields = ['item_name', 'item_description', 'item_image']
 
 
 class FormUsluga(forms.ModelForm):
+    service_image = forms.ImageField(required=False)
     class Meta:
         model = Usluga
         fields = ['service_name', 'service_description', 'service_price', 'service_image']

@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from backend.forms import FormJedzenie, FormPrzedmiot, FormUserRegistration, FormUsluga
 from django.template import loader
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import logout
 
@@ -156,10 +156,10 @@ def createUser(request):
     email = request.POST['email']
     password = request.POST['passwordFirst']
     haszPassword = make_password(password)
-    print("START")
+
     nowyUser = CustomUser.objects.create(first_name=firstName, last_name=lastName, username=username, telefon=telefon, email=email, password=haszPassword)
     nowyUser.save()
-    print("END")
+
     return HttpResponse('Stworzono nowego użytkownika')
 
 
@@ -167,52 +167,89 @@ def createUser(request):
 # AJAX
 
 
-@ensure_csrf_cookie
+# @ensure_csrf_cookie
 def AjaxCreateFood(request):
-    superusers = CustomUser.objects.filter(is_superuser=True)
-    if request.user.is_superuser:
-        form = AdminOrderForm(request.POST, request.FILES)
-        users = request.POST.getlist('uzytkownik', None)
-    else:
-        form = OrderForm(request.POST, request.FILES)
-    files = request.FILES.getlist('files[]', None)
-    order = form.save(commit=False)
-    order.save()
-    zalaczniki_publiczne = []
-    if request.user.is_superuser:
-        order.uzytkownik.add(*users)
-        order.save()
-    else:
-        order.uzytkownik.add(request.user)
-        order.save()
-    for file in files:
-        zalacznik = OrderZalacznikPubliczne.objects.create(zalacznikPubliczne=file)
-        zalaczniki_publiczne.append(zalacznik)
-    uwagaPubliczna = UwagiPubliczne.objects.create(uzytkownik=request.user, order=order, trescPubliczne="Stworzono zlecenie")
-    uwagaPubliczna.save()
-    uwagaPubliczna.zalacznikiPubliczne.add(*zalaczniki_publiczne)
-    if request.user.is_superuser: 
-        for user in users:
-            existing_user = get_object_or_404(CustomUser, id=user)
-            createStatus = OrderStatus.objects.create(uzytkownik=existing_user, order=order, status="DO_WYKONANIA")
-            createStatus.save()  
-    else:
-        for superUser in superusers:
-            createStatus = OrderStatus.objects.create(uzytkownik=superUser, order=order, status="DO_WYKONANIA")
-            createStatus.save()
-    createStatus = OrderStatus.objects.create(uzytkownik=request.user, order=order, status="DO_WYKONANIA")
-    createStatus.save()
-    addAllUsers(order.id,request.user)
-    users_list = order.uzytkownik.all()
-    users_email_list=[]
-    for user in users_list:
-        users_email_list.append(user.email)
-    if(order.nr_zlecenia!=""):
-        message = "Stworzono nowe zlecenie o numerze "+order.nr_zlecenia+"."
-    else:
-        message = "Stworzono nowe zlecenie."
+    food_name = request.POST['food_name']
+    food_description = request.POST['food_description']
+    food_image = request.POST['food_image']
 
-    # t = threading.Thread(target=sending, args=(request, users_email_list, 'Stworzono zlecenie', message))
-    # t.start()
-    sending(request, users_email_list, 'Stworzono zlecenie', message)
-    return JsonResponse({'msg':'<span style="color: green;">File successfully uploaded</span>'})
+    user = request.user
+    food = Jedzenie.objects.create(uzytkownik=user.email, food_name=food_name, food_description=food_description, food_image=food_image)
+    food.save()
+    user.jedzenie.add(food)
+    return JsonResponse({'msg':'File successfully uploaded'})
+
+def AjaxCreateItem(request):
+    item_name = request.POST['item_name']
+    item_description = request.POST['item_description']
+    item_image = request.POST['item_image']
+
+    user = request.user
+    item = Przedmiot.objects.create(uzytkownik=user.email, item_name=item_name, item_description=item_description, item_image=item_image)
+    item.save()
+    user.przedmiot.add(item)
+    return JsonResponse({'msg':'File successfully uploaded'})
+
+def AjaxCreateSkill(request):
+    service_name = request.POST['service_name']
+    service_description = request.POST['service_description']
+    service_price = request.POST['service_price']
+    service_image = request.POST['service_image']
+
+    user = request.user
+    skill = Usluga.objects.create(uzytkownik=user.email, service_name=service_name, service_description=service_description, service_price=service_price, service_image=service_image)
+    skill.save()
+
+    user.usluga.add(skill)
+    return JsonResponse({'msg':'File successfully uploaded'})
+
+
+    # return HttpResponse('Stworzono jedzenie')
+
+    # superusers = CustomUser.objects.filter(is_superuser=True)
+    # if request.user.is_superuser:
+    #     form = AdminOrderForm(request.POST, request.FILES)
+    #     users = request.POST.getlist('uzytkownik', None)
+    # else:
+    #     form = OrderForm(request.POST, request.FILES)
+    # files = request.FILES.getlist('files[]', None)
+    # order = form.save(commit=False)
+    # order.save()
+    # zalaczniki_publiczne = []
+    # if request.user.is_superuser:
+    #     order.uzytkownik.add(*users)
+    #     order.save()
+    # else:
+    #     order.uzytkownik.add(request.user)
+    #     order.save()
+    # for file in files:
+    #     zalacznik = OrderZalacznikPubliczne.objects.create(zalacznikPubliczne=file)
+    #     zalaczniki_publiczne.append(zalacznik)
+    # uwagaPubliczna = UwagiPubliczne.objects.create(uzytkownik=request.user, order=order, trescPubliczne="Stworzono zlecenie")
+    # uwagaPubliczna.save()
+    # uwagaPubliczna.zalacznikiPubliczne.add(*zalaczniki_publiczne)
+    # if request.user.is_superuser: 
+    #     for user in users:
+    #         existing_user = get_object_or_404(CustomUser, id=user)
+    #         createStatus = OrderStatus.objects.create(uzytkownik=existing_user, order=order, status="DO_WYKONANIA")
+    #         createStatus.save()  
+    # else:
+    #     for superUser in superusers:
+    #         createStatus = OrderStatus.objects.create(uzytkownik=superUser, order=order, status="DO_WYKONANIA")
+    #         createStatus.save()
+    # createStatus = OrderStatus.objects.create(uzytkownik=request.user, order=order, status="DO_WYKONANIA")
+    # createStatus.save()
+    # addAllUsers(order.id,request.user)
+    # users_list = order.uzytkownik.all()
+    # users_email_list=[]
+    # for user in users_list:
+    #     users_email_list.append(user.email)
+    # if(order.nr_zlecenia!=""):
+    #     message = "Stworzono nowe zlecenie o numerze "+order.nr_zlecenia+"."
+    # else:
+    #     message = "Stworzono nowe zlecenie."
+
+    # # t = threading.Thread(target=sending, args=(request, users_email_list, 'Stworzono zlecenie', message))
+    # # t.start()
+    # sending(request, users_email_list, 'Stworzono zlecenie', message)
+    # return JsonResponse({'msg':'<span style="color: green;">File successfully uploaded</span>'})
