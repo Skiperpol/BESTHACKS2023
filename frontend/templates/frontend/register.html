@@ -1,7 +1,7 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
 Register 
-<form class="register-form" method="post">
+<form class="register-form" method="post" id="post-create-user">
     {% csrf_token %}
     {{form.as_p}}
     <button type="submit" class="main_button">Zarejestruj</button>
@@ -10,4 +10,61 @@ masz już konto ?
 <div class="green_text">
     <a class="green_text" href="{% url 'login' %}">Zaloguj się</a>
 </div>
+<script>
+  
+    $(document).on("submit", "#post-create-user", function (e) {
+      e.preventDefault();
+  
+      // Pobieranie danych z inputów
+      var firstName = $("#id_first_name").val();
+      var lastName = $("#id_last_name").val();
+      var username = $("#id_username").val();
+      var telefon = $("#id_telefon").val();
+      var email = $("#id_email").val();
+      var passwordFirst = $("#id_password1").val();
+      var passwordSecond = $("#id_password2").val();
+  
+      // Walidacja
+      if (
+        !firstName ||
+        !lastName ||
+        !username ||
+        !telefon ||
+        !email ||
+        !passwordFirst ||
+        !passwordSecond
+      ) {
+        alert("Wypełnij wszystkie pola formularza.");
+        return;
+      }
+  
+      // Walidacja
+      if (passwordFirst !== passwordSecond) {
+        alert("Podane hasła nie są identyczne.");
+        return;
+      }
+      console.log("WYSŁANE")
+      // Wysyłanie danych
+      $.ajax({
+        type: "POST",
+        url: "/createUser",
+        data: {
+          firstName: firstName,
+          lastName: lastName,
+          username: username,
+          telefon: telefon,
+          email: email,
+          passwordFirst: passwordFirst,
+          csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+        },
+        success: function (data) {
+          console.log("Stworzono nowego użytkownika");
+        //   window.location.href = "/";
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          console.log("Wystąpił błąd podczas tworzenia użytkownika.");
+        },
+      });
+    });
+  </script>
 {% endblock content %}

@@ -8,12 +8,12 @@ ROLA = [
     ]
 
 class CustomUser(AbstractUser):
-    telefon = models.CharField(max_length=30, blank=False)
-    adres_zamieszkania = models.CharField(max_length=50, blank=False)
-    email = models.EmailField(unique=True, blank=False)
+    telefon = models.CharField(max_length=30, blank=True)
+    adres_zamieszkania = models.CharField(max_length=50, blank=True)
+    email = models.EmailField(unique=True, blank=True)
     data_urodzenia = models.DateField(blank=True, null=True)
     avatar = models.ImageField(blank=True)
-    rola = models.CharField(max_length=30, choices=ROLA)
+    rola = models.CharField(max_length=30, choices=ROLA, blank=True)
     zweryfikowany = models.BooleanField(blank=True, null=True)
     # avatar = models.ImageField(blank=True, default="images/1.png")
 
