@@ -1,5 +1,6 @@
 {% extends 'frontend/base.html' %}
 {% block sharefood %}
+{% load static %}
 active
 {% endblock %}
 {% block content %}
@@ -13,10 +14,24 @@ Share your food !!!
     {{ form.as_p }}
     <button type="submit" class="main_button">Submit</button>
 </form>
-{{dodane_jedzenie}}
+{% if dodane_jedzenie %}
+    <h2>Udostępnione posiłki </h2>
+{% else %}
+    <h2>Share food and start helping !</h2>
+{% endif %}
+    <div class="default_card_wrapper">
+    {% for dod in dodane_jedzenie %}
+        <div class="default_card">
+            <div class="img-card-container">
+                <img src="{% static 'frontend/rzepa.jpg' %}" alt="">
+            </div>
+            <div class="cardtext">{{dod.food_name}}</div>
+        </div>
+    {% endfor %}
+</div>
 {% else %}
 {% for jedzen in jedzenie %}
-{{ jedzen }}
+    {{ jedzen }}
 {% endfor %}
 {% endif %}
 {% endif %}
