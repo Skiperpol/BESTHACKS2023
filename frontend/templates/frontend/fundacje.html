@@ -3,6 +3,12 @@
 active
 {% endblock %}
 {% block content %}
-Fundacje
-<button><a href="{% url 'organizacja_form' %}">DODAJ SWOJĄ</a></button>
+<div id="org-container">
+    <div class="org-inner">
+        <h3>Fundacje</h3>
+        <a class="main_button" href="{% url 'organizacja_form' %}">Dodaj swoją organizacje</a>
+    </div>
+    <h3>Moje fundacje</h3>
+    <h3>Pozostałe fundacje</h3>
+</div>
 {% endblock content %}

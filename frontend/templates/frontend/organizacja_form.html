@@ -3,11 +3,12 @@
 active
 {% endblock %}
 {% block content %}
-Fundacje
+<div id="share-container">
+<h3>Dodaj fundacje</h3>
 <form method="post" id="create-organization">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="main_button">Submit</button>
+    <button type="submit" class="main_button">Zatwierdź</button>
 </form>
 
 <script>
@@ -32,7 +33,7 @@ Fundacje
       type: 'post',
       success: function (response) {
         console.log("Stworzono nowe zlecenie")
-        window.location.href = '/sharefood';
+        window.location.href = '/fundacje';
       },
       error: function (response) {
         console.log("Wystąpił błąd podczas tworzenia zlecenia.");
@@ -40,5 +41,5 @@ Fundacje
     });
   });
 </script>
-
+</div>
 {% endblock content %}

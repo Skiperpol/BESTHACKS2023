@@ -1,24 +1,42 @@
 {% extends 'frontend/base.html' %}
+{% load static %}
 {% block shareskills %}
 active
 {% endblock %}
+
 {% block content %}
-Share skills
+
+<div id="share-container">
 {% if rola %}
 {% if rola == 'WOLONTARIUSZ' %}
-Share your skils !!!
-{% endif %}
+<h3>Udostępnij swoje usługi</h3>
 
-<form method="post">
+<form method="post" id="create-skills">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="main_button">Submit</button>
 </form>
-{{dodane_uslugi}}
+{% if dodane_uslugi %}
+    <h3>Moje oferowane usługi</h3>
+{% else %}
+  <h3>Udostępnij swoje usługi już teraz, odkryj magie pomagania</h3>
+{% endif %}
+    <div class="default_card_wrapper">
+    {% for dod in dodane_uslugi %}
+        <div class="default_card">
+            <div class="img-card-container">
+                <img src="{% static 'frontend/rzepa.jpg' %}" alt="">
+            </div>
+            <div class="cardtext">{{dod.item_name}}</div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endif %}
 {% endif %}
 
 <script>
-    $(document).on('submit','#create-item',function(e){
+    $(document).on('submit','#create-skills',function(e){
     e.preventDefault();
 
     var form_data = new FormData();
@@ -50,4 +68,5 @@ Share your skils !!!
   });
 </script>
 
+</div>  
 {% endblock content %}

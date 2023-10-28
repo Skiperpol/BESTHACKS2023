@@ -85,7 +85,37 @@ a {
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    width: 27vw;
+    width: 28vw;
+}
+h3 {
+    letter-spacing: 2px;
+    color: #34A853
+}
+.org-inner {
+    width: 100%;
+    display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: flex-start;
+align-content: flex-start;
+}
+#share-container {
+    margin-top: 5vh;
+    width: 100%;
+}
+#map {
+    height: 50vh;
+}
+#org-container {
+    margin-top: 5vh;
+    width: 100%;
+    display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: flex-start;
+align-content: flex-start;
 }
 #footer {
     background-color: #34A853;

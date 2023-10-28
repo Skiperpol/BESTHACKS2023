@@ -1,20 +1,36 @@
 {% extends 'frontend/base.html' %}
+{% load static %}
 {% block shareitems %}
 active
 {% endblock %}
 {% block content %}
-ShareItems
+<div id="share-container">
 {% if rola %}
 {% if rola == 'WOLONTARIUSZ' %}
-Share your items !!!
-{% endif %}
+<h3>Przekaż przedmioty</h3>
 
-<form method="post">
+<form method="post" id="create-item">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="main_button">Submit</button>
 </form>
-{{dodane_przedmioty}}
+{% if dodane_przedmioty %}
+    <h3>Moje dostępnione przedmioty </h3>
+{% else %}
+<h3>Udostępnij przedmioty już teraz, odkryj magie pomagania</h3> 
+{% endif %}
+    <div class="default_card_wrapper">
+    {% for dod in dodane_przedmioty %}
+        <div class="default_card">
+            <div class="img-card-container">
+                <img src="{% static 'frontend/rzepa.jpg' %}" alt="">
+            </div>
+            <div class="cardtext">{{dod.item_name}}</div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endif %}
 {% endif %}
 
 <script>
@@ -48,5 +64,5 @@ Share your items !!!
     });
   });
 </script>
-
+</div>
 {% endblock content %}

@@ -4,10 +4,11 @@
 active
 {% endblock %}
 {% block content %}
+
+<div id="share-container">
 {% if rola %}
-{{ rola }}
 {% if rola == 'WOLONTARIUSZ' %}
-Share your food !!!
+<h3>Przekaż artykuły spożywcze</h3>
 
 <form method="post" id="create-food">
     {% csrf_token %}
@@ -15,21 +16,25 @@ Share your food !!!
     <button type="submit" class="main_button">Submit</button>
 </form>
 {% if dodane_jedzenie %}
-    <h2>Udostępnione posiłki </h2>
+    <h3>Moje podarowane posiłki </h3>
 {% else %}
-    <h2>Share food and start helping !</h2>
+    <h3>Udostępnij posiłki już teraz, odkryj magie pomagania</h3>
 {% endif %}
     <div class="default_card_wrapper">
     {% for dod in dodane_jedzenie %}
         <div class="default_card">
             <div class="img-card-container">
+                {% if dod.food_image %}
+                <img src="{{ dod.food_image.source }}" alt="">
+                {% else %}
                 <img src="{% static 'frontend/rzepa.jpg' %}" alt="">
+                {% endif %}
             </div>
             <div class="cardtext">{{dod.food_name}}</div>
         </div>
     {% endfor %}
 </div>
-{% else %}
+<h3>inne</h3>
 {% for jedzen in jedzenie %}
     {{ jedzen }}
 {% endfor %}
@@ -66,5 +71,5 @@ Share your food !!!
     });
   });
 </script>
-
+</div>  
 {% endblock content %}
