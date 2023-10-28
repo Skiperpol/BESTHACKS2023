@@ -4,11 +4,8 @@ Login
 <form class="login-form" method="post">
     {% csrf_token %}
     {{form.as_p}}
-    <button type="submit" class="defaultbutton">Zaloguj</button>
+    <button type="submit" class="main_button">Zaloguj</button>
 </form>
-<div class="main_button">
-    Zaloguj się
-</div>
 nie masz konta frajerze?
 <div class="green_text">
     <a class="green_text" href="{% url 'register' %}">zarejestruj się</a>

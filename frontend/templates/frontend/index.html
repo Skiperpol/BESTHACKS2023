@@ -1,4 +1,19 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
-Index - strona głowna
+<q> Our goal is Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec consectetur tortor. Aliquam blandit luctus justo vel consequat </q>
+<div id="index-container">
+    <div id="index-text-container">
+        <div class="index-text">
+            Rozwijaj lokalną społeczność, <br> wspieraj potrzebujących <br>i odkrywaj siebie
+        </div>
+        <div class="main_button">
+            Pomagam
+        </div>
+    </div>
+    <div id="index-img-container">
+        {% load static %}
+        <!-- <img class="index-img" src="{% static 'frontend/group.png' %}" alt=""> -->
+    </div>
+</div>
+
 {% endblock content %}
