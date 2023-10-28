@@ -1,5 +1,6 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
+<<<<<<< HEAD
 ShareItems
 
 <script>
@@ -33,4 +34,17 @@ ShareItems
     });
   });
 </script>
+=======
+{% if rola %}
+{% if rola == 'WOLONTARIUSZ' %}
+Share your items !!!
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="main_button">Submit</button>
+</form>
+{% endif %}
+>>>>>>> d0e23902dc69f81032829e74e570c52bd5d671bb
 {% endblock content %}

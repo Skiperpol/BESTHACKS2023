@@ -1,14 +1,19 @@
 {% extends 'frontend/base.html' %}
+{% block sharefood %}
+active
+{% endblock %}
 {% block content %}
+{% if rola %}
+{{ rola }}
 {% if rola == 'WOLONTARIUSZ' %}
 Share your food !!!
-{% endif %}
 
 <form method="post" id="create-food">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="main_button">Submit</button>
 </form>
+<<<<<<< HEAD
 
 <script>
     $(document).on('submit','#create-food',function(e){
@@ -48,4 +53,12 @@ Share your food !!!
     });
   });
 </script>
+=======
+{% else %}
+{% for jedzen in jedzenie %}
+{{ jedzen }}
+{% endfor %}
+{% endif %}
+{% endif %}
+>>>>>>> d0e23902dc69f81032829e74e570c52bd5d671bb
 {% endblock content %}

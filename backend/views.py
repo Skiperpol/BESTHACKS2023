@@ -23,7 +23,10 @@ def index(request):
 
 def sharefood(request):
     user = request.user
-    rola = user.rola
+    if user.is_authenticated:
+        rola = user.rola
+    else: 
+        rola = None
     if rola == "POTRZEBUJACY":
         jedzenie = Jedzenie.objects.all()
         return render(request, 'frontend/sharefood.html', {'jedzenie': jedzenie, 'rola': rola})
@@ -42,14 +45,17 @@ def sharefood(request):
 
 def shareitems(request):
     user = request.user
-    rola = user.rola
+    if user.is_authenticated:
+        rola = user.rola
+    else: 
+        rola = None
     if rola == "POTRZEBUJACY":
         przedmiot = Przedmiot.objects.all()
-        return render(request, 'frontend/sharefood.html', {'przedmiot': przedmiot, 'rola': rola})
+        return render(request, 'frontend/shareitems.html', {'przedmiot': przedmiot, 'rola': rola})
     elif rola == 'WOLONTARIUSZ':
         form = FormPrzedmiot()
         print("111111")
-        return render(request, 'frontend/sharefood.html', {'form': form, 'rola': rola})
+        return render(request, 'frontend/shareitems.html', {'form': form, 'rola': rola})
     else:
         pass
 
@@ -62,13 +68,16 @@ def shareitems(request):
 
 def shareskills(request):
     user = request.user
-    rola = user.rola
+    if user.is_authenticated:
+        rola = user.rola
+    else: 
+        rola = None
     if rola == "POTRZEBUJACY":
         usluga = Usluga.objects.all()
-        return render(request, 'frontend/sharefood.html', {'usluga': usluga, 'rola': rola})
+        return render(request, 'frontend/shareskills.html', {'usluga': usluga, 'rola': rola})
     elif rola == 'WOLONTARIUSZ':
         form = FormUsluga()
-        return render(request, 'frontend/sharefood.html', {'form': form, 'rola': rola})
+        return render(request, 'frontend/shareskills.html', {'form': form, 'rola': rola})
     else:
         pass
 
