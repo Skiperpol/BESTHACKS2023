@@ -11,7 +11,7 @@ active
 {% if rola == 'WOLONTARIUSZ' %}
 <h3>Udostępnij swoje usługi</h3>
 
-<form method="post" id="create-skills">
+<form method="post" id="create-skills" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="main_button">Submit</button>
