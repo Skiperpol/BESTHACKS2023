@@ -12,7 +12,7 @@ Share your items !!!
     <button type="submit" class="main_button">Submit</button>
 </form>
 {% endif %}
-{% endblock content %}
+
 <script>
     $(document).on('submit','#create-item',function(e){
     e.preventDefault();
@@ -44,3 +44,5 @@ Share your items !!!
     });
   });
 </script>
+
+{% endblock content %}

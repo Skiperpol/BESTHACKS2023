@@ -13,17 +13,18 @@ Share your food !!!
     {{ form.as_p }}
     <button type="submit" class="main_button">Submit</button>
 </form>
+{{dodane_jedzenie}}
 {% else %}
 {% for jedzen in jedzenie %}
 {{ jedzen }}
 {% endfor %}
 {% endif %}
 {% endif %}
-{% endblock content %}
+
 <script>
     $(document).on('submit','#create-food',function(e){
     e.preventDefault();
-
+      console.log("12312")
     // const exportProgress = document.getElementById('exportProgress');
     // // Dodawanie plików
     var form_data = new FormData();
@@ -58,3 +59,5 @@ Share your food !!!
     });
   });
 </script>
+
+{% endblock content %}
