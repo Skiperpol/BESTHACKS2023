@@ -25,8 +25,9 @@ SECRET_KEY = 'django-insecure-ai#9+sw7ur)9050ln6zi-u&tivvfh-1frqx)ios*lytzx)ui$y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+# LOGIN_URL = '/'
 
 # Application definition
 
@@ -37,7 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'frontend.apps.FrontendConfig',
+    'backend.apps.BackendConfig',
 ]
+
+AUTH_USER_MODEL = 'backend.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
