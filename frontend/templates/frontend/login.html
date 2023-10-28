@@ -1,6 +1,11 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
 Login 
+<form class="login-form" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="defaultbutton">Zaloguj</button>
+</form>
 <div class="main_button">
     Zaloguj się
 </div>
