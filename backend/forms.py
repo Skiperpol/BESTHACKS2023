@@ -46,7 +46,7 @@ TITLE_CHOICES = [
 ]
 
 
-class FormEventCreate(forms.Form):
+class FormEventCreate(forms.ModelForm):
     # image = MultipleFileField(label='Zdjęcia dodatkowe', required=False, validators=[file_size], widget=forms.ClearableFileInput(attrs={'multiple': True}))
     class Meta:
         model = Event
@@ -79,19 +79,19 @@ class FormEventCreate(forms.Form):
     # y = forms.FloatField(label='', required=True, widget=forms.NumberInput(attrs={'id': 'y', 'step': "0.0000000001"}))
     # image = forms.FileField(label='Zdjęcia dodatkowe', required=False, validators=[file_size], widget=forms.ClearableFileInput(attrs={'multiple': True}))
 
-class FormJedzenie(forms.Form):
+class FormJedzenie(forms.ModelForm):
     class Meta:
         model = Jedzenie
         fields = ['food_name', 'food_description', 'food_image']
 
 
-class FormPrzedmiot(forms.Form):
+class FormPrzedmiot(forms.ModelForm):
     class Meta:
         model = Przedmiot
         fields = ['item_name', 'item_description', 'item_image']
 
 
-class FormUsluga(forms.Form):
+class FormUsluga(forms.ModelForm):
     class Meta:
         model = Usluga
         fields = ['service_name', 'service_description', 'service_price', 'service_image']

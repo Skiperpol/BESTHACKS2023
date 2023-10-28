@@ -1,11 +1,12 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
-ShareFood 
-{{ rola }}
+{% if rola == 'WOLONTARIUSZ' %}
+Share your food !!!
+{% endif %}
 
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Submit</button>
+    <button type="submit" class="main_button">Submit</button>
 </form>
 {% endblock content %}
