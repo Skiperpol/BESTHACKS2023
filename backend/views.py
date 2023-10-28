@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from backend.forms import FormUserRegistration
+from backend.forms import FormJedzenie, FormUserRegistration
 from django.template import loader
 from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import logout
 
-from backend.models import CustomUser
+from backend.models import CustomUser, Jedzenie
 
 def is_admin(user):
     return user.is_superuser
@@ -22,6 +22,17 @@ def index(request):
 
 
 def sharefood(request):
+    user = request.user
+    rola = user.rola
+    if rola == "POTRZEBUJACY":
+        jedzenie = Jedzenie.objects.all()
+        return render(request, 'frontend/sharefood.html', {'jedzenie': jedzenie, 'rola': rola})
+    elif rola == 'WOLONTARIUSZ':
+        form = FormJedzenie()
+        return render(request, 'frontend/sharefood.html', {'form': form, 'rola': rola})
+    else:
+        pass
+    
     template = loader.get_template("frontend/sharefood.html")
     context = {
         "lorem": "lorem",
