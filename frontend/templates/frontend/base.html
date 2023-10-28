@@ -8,13 +8,24 @@
     <title>AboutMe</title>
 </head>
 <body>
-    <a href="#">ShareFood</a>
-    <a href="#">ShareItems</a>
-    <a href="#">ShareSkills</a>
-    <a href="#">Events</a>
-    <a href="#">Orgs</a>
-    <a href="#">Account</a>
-    {% block content %}
-    {% endblock content %}
+    <div id="container">
+        <div id="nav">
+            <div class="nav_side">
+                <a href="{% url 'sharefood' %}">ShareFood</a>
+                <a href="{% url 'shareitems' %}">ShareItems</a>
+                <a href="{% url 'shareskills' %}">ShareSkills</a>
+            </div>
+            <div id="logo_div">
+                <a href="{% url 'index' %}">AroundMe</a>
+            </div>
+            <div class="nav_side">
+                <a href="{% url 'events' %}">Events</a>
+                <a href="{% url 'fundacje' %}">Orgs</a>
+                <a href="{% url 'fundacje' %}">Account</a>
+            </div>
+        </div>
+        {% block content %}
+        {% endblock content %}
+    </div>
 </body>
 </html>
