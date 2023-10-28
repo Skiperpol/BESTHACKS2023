@@ -68,3 +68,21 @@ class FormEventCreate(forms.Form):
     # x = forms.FloatField(label='Naciśnij na mapę aby wybrać współrzędne geograficzne', required=True, widget=forms.NumberInput(attrs={'id': 'x', 'step': "0.0000000001"}))
     # y = forms.FloatField(label='', required=True, widget=forms.NumberInput(attrs={'id': 'y', 'step': "0.0000000001"}))
     # image = forms.FileField(label='Zdjęcia dodatkowe', required=False, validators=[file_size], widget=forms.ClearableFileInput(attrs={'multiple': True}))
+
+class Jedzenie(forms.Form):
+    food_name = forms.CharField(max_length=100, blank=True)
+    food_description = forms.CharField(max_length=100, blank=True)
+    food_image = forms.ImageField()
+
+class Przedmiot(forms.Form):
+    item_name = forms.CharField(max_length=100, blank=True)
+    item_description = forms.CharField(max_length=100, blank=True)
+    item_image = forms.ImageField()
+
+class Usługa(forms.Form):
+    service_name = forms.CharField(max_length=100, blank=True)
+    service_description = forms.CharField(max_length=100, blank=True)
+    service_price = forms.CharField(max_length=100, blank=True)
+    service_image = forms.ImageField()
+
+      
