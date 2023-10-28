@@ -1,9 +1,11 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
 Register 
-<div class="main_button">
-    Zarejestruj się
-</div>
+<form class="register-form" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="main_button">Zarejestruj</button>
+</form>
 masz już konto ?
 <div class="green_text">
     <a class="green_text" href="{% url 'login' %}">Zaloguj się</a>
