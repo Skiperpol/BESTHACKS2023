@@ -20,8 +20,10 @@ active
 {% else %}
     <h3>Udostępnij posiłki już teraz, odkryj magie pomagania</h3>
 {% endif %}
+
     <div class="default_card_wrapper">
     {% for dod in dodane_jedzenie %}
+    <a href="{% url 'food_update' foodId=dod.food_id %}">
         <div class="default_card">
             <div class="img-card-container">
                 {% if dod.food_image %}
@@ -32,9 +34,11 @@ active
             </div>
             <div class="cardtext">{{dod.food_name}}</div>
         </div>
+      </a>
     {% endfor %}
 </div>
-<h3>inne</h3>
+
+{% else %}
 {% for jedzen in jedzenie %}
     {{ jedzen }}
 {% endfor %}
