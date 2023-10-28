@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
     
 class Organization(models.Model):
     nazwa = models.CharField(max_length=50, blank=False)
+    uzytkownik = models.CharField(max_length=100, blank=True)
     opis = models.CharField(max_length=500, blank=True)
     logo = models.ImageField(blank=True)
 
@@ -80,6 +81,7 @@ class CustomUser(AbstractUser):
     jedzenie = models.ManyToManyField(Jedzenie, blank=True)
     usluga = models.ManyToManyField(Usluga, blank=True)
     przedmiot = models.ManyToManyField(Przedmiot, blank=True)
+    organizacja = models.ManyToManyField(Organization, blank=True)
     # avatar = models.ImageField(blank=True, default="images/1.png")
 
     def __str__(self):
