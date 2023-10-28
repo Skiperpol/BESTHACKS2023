@@ -14,6 +14,7 @@ class CustomUser(AbstractUser):
     data_urodzenia = models.DateField(blank=True, null=True)
     avatar = models.ImageField(blank=True)
     rola = models.CharField(max_length=30, choices=ROLA)
+    zweryfikowany = models.BooleanField(blank=True)
     # avatar = models.ImageField(blank=True, default="images/1.png")
 
     def __str__(self):
@@ -51,3 +52,29 @@ class Image(models.Model):
     image = models.ImageField()
     def __str__(self):
         return self.event.event_name
+    
+
+class Jedzenie(models.Model):
+    food_id = models.BigAutoField(primary_key=True)
+    uzytkownik = models.ManyToManyField(CustomUser, blank=True)
+    food_name = models.CharField(max_length=100, blank=True)
+    food_description = models.CharField(max_length=100, blank=True)
+    food_image = models.ImageField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class Przedmiot(models.Model):
+    item_id = models.BigAutoField(primary_key=True)
+    uzytkownik = models.ManyToManyField(CustomUser, blank=True)
+    item_name = models.CharField(max_length=100, blank=True)
+    item_description = models.CharField(max_length=100, blank=True)
+    item_image = models.ImageField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class Usługa(models.Model):
+    service_id = models.BigAutoField(primary_key=True)
+    uzytkownik = models.ManyToManyField(CustomUser, blank=True)
+    service_name = models.CharField(max_length=100, blank=True)
+    service_description = models.CharField(max_length=100, blank=True)
+    service_price = models.CharField(max_length=100, blank=True)
+    service_image = models.ImageField()
+    created_at = models.DateTimeField(auto_now_add=True)
