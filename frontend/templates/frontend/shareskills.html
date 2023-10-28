@@ -1,4 +1,14 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
-Share skills
+{% if rola %}
+{% if rola == 'WOLONTARIUSZ' %}
+Share your skils !!!
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="main_button">Submit</button>
+</form>
+{% endif %}
 {% endblock content %}

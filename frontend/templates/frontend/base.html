@@ -12,11 +12,12 @@
     <div id="container">
         <div id="nav">
             <div class="nav_side">
-                <a href="{% url 'sharefood' %}">ShareFood</a>
+                <a href="{% url 'sharefood' %}" class="{% block sharefood %}{% endblock sharefood %}">ShareFood</a>
                 <a href="{% url 'shareitems' %}">ShareItems</a>
                 <a href="{% url 'shareskills' %}">ShareSkills</a>
             </div>
             <div id="logo_div">
+                <img class="logo" src="{% static 'frontend/logo.jpg' %}" alt="">
                 <a href="{% url 'index' %}">AroundMe</a>
             </div>
             <div class="nav_side">

@@ -1,4 +1,14 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
-ShareItems
+{% if rola %}
+{% if rola == 'WOLONTARIUSZ' %}
+Share your items !!!
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="main_button">Submit</button>
+</form>
+{% endif %}
 {% endblock content %}

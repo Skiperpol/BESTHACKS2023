@@ -10,6 +10,23 @@ a {
   text-decoration: none;
   color: black;
 }
+#logo_div {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+#logo_div a{ 
+    font-size: 1.4em;
+    color: #34A853;
+}
+.logo {
+    padding-top: 4vh;
+    width: 5em;
+    height: auto;
+}
 #index-img-container {
     position: relative;
     width: 60%;
@@ -31,8 +48,8 @@ a {
     margin-top: 2vh;
 }
 #container {
-    width: 80vw;
-    margin-left: 10vw;
+    width: 70vw;
+    margin-left: 15vw;
     height: 92vh;
 }
 
@@ -54,6 +71,9 @@ a {
     width: 100%;
     font-size: .9em;
 }
+.active {
+    background-color: #34a85337;
+}
 .small-login {
     font-size: .8em;
     margin-top: .5vh;
@@ -65,7 +85,7 @@ a {
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    width: 30vw;
+    width: 28vw;
 }
 #footer {
     background-color: #34A853;
@@ -90,10 +110,16 @@ a {
     font-size: 1.1em;
     text-align: center;
 }
+.nav_side a {
+    border: 2px solid #34A853;
+    padding: 1vh 1vw 1vh 1vw;
+    border-radius: 80px;
+}
 .green_text {
     color: #34A853;
 }
-q {
+.q {
+    font-style: italic;
     position: relative;
     display: block;
     width: 60%;
