@@ -27,18 +27,19 @@ a {
     height: auto;
 }
 #index-img-container {
-    position: relative;
+    position: absolute;
     width: 60%;
     float: right;
-    height: 57.97vh;
+    bottom: 6vh;
+    height: 60vh;
 }
 .index-img { 
     position: absolute;
     bottom: 0;
     object-fit: cover;
-    width: 90%;
+    width: 65%;
     height: auto;
-    right: -5vw;
+    right: -10vw;
 }
 #login_container label {
     font-size: 1em;
