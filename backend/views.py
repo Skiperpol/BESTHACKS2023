@@ -108,11 +108,16 @@ def events(request):
     return HttpResponse(template.render(context, request))
 
 def fundacje(request):
-    template = loader.get_template("frontend/fundacje.html")
-    context = {
-        "lorem": "lorem",
-    }
-    return HttpResponse(template.render(context, request))
+    user = request.user
+    twoje_organizacje = user.organizacja.all()
+    inne_organizacje = Organization.objects.exclude(id__in=twoje_organizacje.values_list('id', flat=True))
+
+    return render(
+        request = request,
+        template_name = "frontend/fundacje.html",
+        context={"twoje_organizacje":twoje_organizacje, "inne_organizacje":inne_organizacje}
+        )
+
 
 def account(request):
     template = loader.get_template("frontend/account.html")
@@ -224,7 +229,7 @@ def skill_update(request, skillId):
 def AjaxCreateFood(request):
     food_name = request.POST['food_name']
     food_description = request.POST['food_description']
-    food_image = request.POST['food_image']
+    food_image = request.FILES['food_image']
 
     user = request.user
     food = Jedzenie.objects.create(uzytkownik=user.email, food_name=food_name, food_description=food_description, food_image=food_image)
@@ -236,7 +241,7 @@ def AjaxCreateFood(request):
 def AjaxCreateItem(request):
     item_name = request.POST['item_name']
     item_description = request.POST['item_description']
-    item_image = request.POST['item_image']
+    item_image = request.FILES['item_image']
 
     user = request.user
     item = Przedmiot.objects.create(uzytkownik=user.email, item_name=item_name, item_description=item_description, item_image=item_image)
@@ -248,7 +253,7 @@ def AjaxCreateSkill(request):
     service_name = request.POST['service_name']
     service_description = request.POST['service_description']
     service_price = request.POST['service_price']
-    service_image = request.POST['service_image']
+    service_image = request.FILES['service_image']
 
     user = request.user
     skill = Usluga.objects.create(uzytkownik=user.email, service_name=service_name, service_description=service_description, service_price=service_price, service_image=service_image)
@@ -260,7 +265,7 @@ def AjaxCreateSkill(request):
 def AjaxCreateOrganization(request):
     nazwa = request.POST['nazwa']
     opis = request.POST['opis']
-    logo = request.POST['logo']
+    logo = request.FILES['logo']
 
 
     user = request.user
@@ -324,7 +329,8 @@ def AjaxUpdateFood(request):
     food_name = request.POST.get('food_name')
     food_description = request.POST.get('food_description')
     food_id = request.POST.get('food_id')
-    food_image = request.POST.get('food_image')
+    food_image = request.POST.get['food_image']
+    # food_image = request.POST.get('food_image')
     food = get_object_or_404(Jedzenie, food_id=food_id)
     food.food_name = food_name
     food.food_description = food_description

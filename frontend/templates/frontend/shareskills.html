@@ -25,7 +25,11 @@ active
     {% for dod in dodane_uslugi %}
         <div class="default_card">
             <div class="img-card-container">
+                {% if dod.service_image %}
+                <img src="{{ dod.service_image.url }}" alt="">
+                {% else %}
                 <img src="{% static 'frontend/rzepa.jpg' %}" alt="">
+                {% endif %}
             </div>
             <div class="cardtext">{{dod.item_name}}</div>
         </div>
@@ -41,12 +45,15 @@ active
 
     var form_data = new FormData();
 
+    var fileInput = $('#id_service_image')[0];
+    var file = fileInput.files[0];
+
     csrf_token = $('input[name="csrfmiddlewaretoken"]').val();      
     form_data.append("csrfmiddlewaretoken", csrf_token);
     form_data.append("service_name", $('#id_service_name').val());
     form_data.append("service_description", $('#id_service_description').val());
     form_data.append("service_price", $('#id_service_price').val());
-    form_data.append("service_image", $('#id_service_image').val());
+    form_data.append("service_image", file);
 
     // Wysyłanie plików
     $.ajax({
@@ -59,7 +66,7 @@ active
       type: 'post',
       success: function (response) {
         console.log("Stworzono nowe zlecenie")
-        // window.location.href = '/home';
+        window.location.reload();
       },
       error: function (response) {
         console.log("Wystąpił błąd podczas tworzenia zlecenia.");

@@ -51,11 +51,14 @@ active
 
     var form_data = new FormData();
 
+    var fileInput = $('#id_food_image')[0];
+    var file = fileInput.files[0];
+
     csrf_token = $('input[name="csrfmiddlewaretoken"]').val();      
     form_data.append("csrfmiddlewaretoken", csrf_token);
     form_data.append("food_name", $('#id_food_name').val());
     form_data.append("food_description", $('#id_food_description').val());
-    form_data.append("food_image", $('#id_food_image').val());
+    form_data.append("food_image", file);
 
     $.ajax({
       url: '/AjaxCreateFood',
