@@ -3,6 +3,7 @@
 active
 {% endblock %}
 {% block content %}
+ShareItems
 {% if rola %}
 {% if rola == 'WOLONTARIUSZ' %}
 Share your items !!!
@@ -15,3 +16,34 @@ Share your items !!!
 </form>
 {% endif %}
 {% endblock content %}
+<script>
+    $(document).on('submit','#create-item',function(e){
+    e.preventDefault();
+
+    var form_data = new FormData();
+
+    csrf_token = $('input[name="csrfmiddlewaretoken"]').val();      
+    form_data.append("csrfmiddlewaretoken", csrf_token);
+    form_data.append("item_name", $('#id_item_name').val());
+    form_data.append("item_description", $('#id_item_description').val());
+    form_data.append("item_image", $('#id_item_image').val());
+
+    // Wysyłanie plików
+    $.ajax({
+      url: '/AjaxCreateItem',
+      dataType: 'json',
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: form_data,
+      type: 'post',
+      success: function (response) {
+        console.log("Stworzono nowe zlecenie")
+        // window.location.href = '/home';
+      },
+      error: function (response) {
+        console.log("Wystąpił błąd podczas tworzenia zlecenia.");
+      }
+    });
+  });
+</script>
