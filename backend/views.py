@@ -59,6 +59,14 @@ def fundacje(request):
     }
     return HttpResponse(template.render(context, request))
 
+def account(request):
+    template = loader.get_template("frontend/account.html")
+    context = {
+        "username": request.user.username,
+    }
+    return HttpResponse(template.render(context, request))
+
+
 
 
 
@@ -119,3 +127,4 @@ def createUser(request):
     nowyUser.save()
     print("END")
     return HttpResponse('Stworzono nowego użytkownika')
+
