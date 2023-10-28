@@ -183,7 +183,16 @@ def createUser(request):
 
     return HttpResponse('Stworzono nowego użytkownika')
 
+def food_update(request, foodId):
+    food = get_object_or_404(Jedzenie, food_id=foodId)
+    food_id = food.food_id
+    form = FormJedzenie(instance=food)
 
+    return render(
+        request = request,
+        template_name = "frontend/food_update.html",
+        context={"form":form, "food_id":food_id}
+        )
 
 # AJAX
 
@@ -287,3 +296,15 @@ def AjaxCreateOrganization(request):
     # # t.start()
     # sending(request, users_email_list, 'Stworzono zlecenie', message)
     # return JsonResponse({'msg':'<span style="color: green;">File successfully uploaded</span>'})
+
+def AjaxUpdateFood(request):
+    food_name = request.POST.get('food_name')
+    food_description = request.POST.get('food_description')
+    food_id = request.POST.get('food_id')
+    food_image = request.POST.get('food_image')
+    food = get_object_or_404(Jedzenie, food_id=food_id)
+    food.food_name = food_name
+    food.food_description = food_description
+    food.food_image = food_image
+    food.save()
+    return JsonResponse({'msg':'File successfully uploaded'})

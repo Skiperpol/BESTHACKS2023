@@ -19,16 +19,20 @@ Share your food !!!
 {% else %}
     <h2>Share food and start helping !</h2>
 {% endif %}
+
     <div class="default_card_wrapper">
     {% for dod in dodane_jedzenie %}
+    <a href="{% url 'food_update' foodId=dod.food_id %}">
         <div class="default_card">
             <div class="img-card-container">
                 <img src="{% static 'frontend/rzepa.jpg' %}" alt="">
             </div>
             <div class="cardtext">{{dod.food_name}}</div>
         </div>
+      </a>
     {% endfor %}
 </div>
+
 {% else %}
 {% for jedzen in jedzenie %}
     {{ jedzen }}

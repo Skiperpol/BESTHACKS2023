@@ -14,6 +14,7 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('logout/', logout_view, name='logout'),
     path('organizacja_form/', organizacja_form, name='organizacja_form'),
+    path('food_update/<foodId>', food_update, name='food_update'),
 
 
 
@@ -22,4 +23,6 @@ urlpatterns = [
     path('AjaxCreateItem', AjaxCreateItem, name='AjaxCreateItem'),
     path('AjaxCreateSkill', AjaxCreateSkill, name='AjaxCreateSkill'),
     path('AjaxCreateOrganization', AjaxCreateOrganization, name='AjaxCreateOrganization'),
+    path('AjaxUpdateFood', AjaxUpdateFood, name='AjaxUpdateFood'),
+    
 ]
