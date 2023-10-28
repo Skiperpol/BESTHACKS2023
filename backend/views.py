@@ -7,6 +7,8 @@ from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import logout
 
+from backend.models import CustomUser
+
 def is_admin(user):
     return user.is_superuser
 
@@ -103,15 +105,17 @@ def register(request):
         context={"form":form}
         )
 
-
-# def createUser(request):
-#     firstName = request.POST['firstName']
-#     lastName = request.POST['lastName']
-#     username = request.POST['username']
-#     telefon = request.POST['telefon']
-#     email = request.POST['email']
-#     password = request.POST['passwordFirst']
-#     haszPassword = make_password(password)
-#     nowyUser = CustomUser.objects.create(first_name=firstName, last_name=lastName, username=username, telefon=telefon, email=email, password=haszPassword)
-#     nowyUser.save()
-#     return HttpResponse('Stworzono nowego użytkownika')
+def createUser(request):
+    print("1231231")
+    firstName = request.POST['firstName']
+    lastName = request.POST['lastName']
+    username = request.POST['username']
+    telefon = request.POST['telefon']
+    email = request.POST['email']
+    password = request.POST['passwordFirst']
+    haszPassword = make_password(password)
+    print("START")
+    nowyUser = CustomUser.objects.create(first_name=firstName, last_name=lastName, username=username, telefon=telefon, email=email, password=haszPassword)
+    nowyUser.save()
+    print("END")
+    return HttpResponse('Stworzono nowego użytkownika')
