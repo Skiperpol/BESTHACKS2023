@@ -1,4 +1,11 @@
 {% extends 'frontend/base.html' %}
 {% block content %}
 ShareFood 
+{{ rola }}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
 {% endblock content %}
