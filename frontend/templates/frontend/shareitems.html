@@ -9,7 +9,7 @@ active
 {% if rola == 'WOLONTARIUSZ' %}
 <h3>Przekaż przedmioty</h3>
 
-<form method="post" id="create-item">
+<form method="post" id="create-item" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="main_button">Submit</button>

@@ -5,7 +5,7 @@ active
 {% block content %}
 <div id="share-container">
 <h3>Dodaj fundacje</h3>
-<form method="post" id="create-organization">
+<form method="post" id="create-organization" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="main_button">Zatwierdź</button>

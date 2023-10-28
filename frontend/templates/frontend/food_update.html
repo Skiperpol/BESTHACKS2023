@@ -3,7 +3,7 @@
 active
 {% endblock %}
 {% block content %}
-<form method="post" id="update-food">
+<form method="post" id="update-food" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="main_button">Submit</button>

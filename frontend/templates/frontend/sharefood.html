@@ -10,7 +10,7 @@ active
 {% if rola == 'WOLONTARIUSZ' %}
 <h3>Przekaż artykuły spożywcze</h3>
 
-<form method="post" id="create-food">
+<form method="post" id="create-food" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="main_button">Submit</button>
@@ -27,7 +27,7 @@ active
         <div class="default_card">
             <div class="img-card-container">
                 {% if dod.food_image %}
-                <img src="{{ dod.food_image.source }}" alt="">
+                <img src="{{ dod.food_image.url }}" alt="">
                 {% else %}
                 <img src="{% static 'frontend/rzepa.jpg' %}" alt="">
                 {% endif %}
