@@ -1,13 +1,13 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from backend.forms import FormJedzenie, FormPrzedmiot, FormUserRegistration, FormUsluga
+from backend.forms import FormJedzenie, FormOrganizationCreate, FormPrzedmiot, FormUserRegistration, FormUsluga
 from django.template import loader
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import logout
 
-from backend.models import CustomUser, Jedzenie, Przedmiot, Usluga
+from backend.models import CustomUser, Jedzenie, Organization, Przedmiot, Usluga
 
 def is_admin(user):
     return user.is_superuser
@@ -18,6 +18,16 @@ def index(request):
     context = {
         "lorem": "lorem",
     }
+    return HttpResponse(template.render(context, request))
+
+def organizacja_form(request):
+    template = loader.get_template("frontend/organizacja_form.html")
+    form = FormOrganizationCreate()
+    context = {
+        "lorem": "lorem",
+        "form": form,
+    }
+    
     return HttpResponse(template.render(context, request))
 
 
@@ -55,8 +65,8 @@ def shareitems(request):
         return render(request, 'frontend/shareitems.html', {'przedmiot': przedmiot, 'rola': rola})
     elif rola == 'WOLONTARIUSZ':
         form = FormPrzedmiot()
-        print("111111")
-        return render(request, 'frontend/shareitems.html', {'form': form, 'rola': rola})
+        dodane_przedmioty = user.przedmiot.all()
+        return render(request, 'frontend/shareitems.html', {'form': form, 'rola': rola, 'dodane_przedmioty': dodane_przedmioty})
     else:
         pass
 
@@ -78,7 +88,8 @@ def shareskills(request):
         return render(request, 'frontend/shareskills.html', {'usluga': usluga, 'rola': rola})
     elif rola == 'WOLONTARIUSZ':
         form = FormUsluga()
-        return render(request, 'frontend/shareskills.html', {'form': form, 'rola': rola})
+        dodane_uslugi = user.usluga.all()
+        return render(request, 'frontend/shareskills.html', {'form': form, 'rola': rola, 'dodane_uslugi':dodane_uslugi})
     else:
         pass
 
@@ -214,6 +225,18 @@ def AjaxCreateSkill(request):
     user.usluga.add(skill)
     return JsonResponse({'msg':'File successfully uploaded'})
 
+def AjaxCreateOrganization(request):
+    nazwa = request.POST['nazwa']
+    opis = request.POST['opis']
+    logo = request.POST['logo']
+
+
+    user = request.user
+    organizacja = Organization.objects.create(uzytkownik=user.email, nazwa=nazwa, opis=opis, logo=logo)
+    organizacja.save()
+
+    user.organizacja.add(organizacja)
+    return JsonResponse({'msg':'File successfully uploaded'})
 
     # return HttpResponse('Stworzono jedzenie')
 
