@@ -70,7 +70,7 @@ class Przedmiot(models.Model):
     item_image = models.ImageField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-class Usługa(models.Model):
+class Usluga(models.Model):
     service_id = models.BigAutoField(primary_key=True)
     uzytkownik = models.ManyToManyField(CustomUser, blank=True)
     service_name = models.CharField(max_length=100, blank=True)
