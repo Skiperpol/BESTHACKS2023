@@ -19,13 +19,18 @@
                 <a href="{% url 'index' %}">AroundMe</a>
             </div>
             <div class="nav_side">
-                <a href="{% url 'events' %}">Events</a>
-                <a href="{% url 'fundacje' %}">Orgs</a>
-                <a href="{% url 'fundacje' %}">Account</a>
+                <a href="{% url 'events' %}">Local events</a>
+                <a href="{% url 'fundacje' %}">Organisations</a>
+                <a href="{% url 'login' %}">Login</a>
             </div>
         </div>
         {% block content %}
         {% endblock content %}
+    </div>
+    <div id="footer">
+        <div class="footer_text">
+            @2023 AroundMe
+        </div>
     </div>
 </body>
 </html>

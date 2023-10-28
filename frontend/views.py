@@ -48,3 +48,17 @@ def fundacje(request):
         "lorem": "lorem",
     }
     return HttpResponse(template.render(context, request))
+
+def login(request):
+    template = loader.get_template("frontend/login.html")
+    context = {
+        "lorem": "lorem",
+    }
+    return HttpResponse(template.render(context, request))
+
+def register(request):
+    template = loader.get_template("frontend/register.html")
+    context = {
+        "lorem": "lorem",
+    }
+    return HttpResponse(template.render(context, request))

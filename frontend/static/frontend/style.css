@@ -14,7 +14,7 @@ a {
 #container {
     width: 90vw;
     margin-left: 5vw;
-    height: 99vh;
+    height: 93vh;
 }
 
 #nav {
@@ -39,5 +39,27 @@ a {
     align-items: center;
     align-content: center;
     width: 30vw;
+}
+#footer {
+    background-color: #34A853;
+    height: 6vh;
+    width: 100vw;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
 
+.main_button {
+    width: fit-content;
+    padding: 1vh 4vw 1vh 4vw;
+    background-color: #34A853;
+    color: white;
+    border-radius: 80px;
+}
+.green_text {
+    color: #34A853;
 }
