@@ -13,20 +13,20 @@
         <div id="nav">
             <div class="nav_side">
                 <a href="{% url 'sharefood' %}" class="{% block sharefood %}{% endblock sharefood %}">ShareFood</a>
-                <a href="{% url 'shareitems' %}">ShareItems</a>
-                <a href="{% url 'shareskills' %}">ShareSkills</a>
+                <a href="{% url 'shareitems' %}" class="{% block shareitems %}{% endblock shareitems %}">ShareItems</a>
+                <a href="{% url 'shareskills' %}" class="{% block shareskills %}{% endblock shareskills %}">ShareSkills</a>
             </div>
             <div id="logo_div">
                 <img class="logo" src="{% static 'frontend/logo.jpg' %}" alt="">
                 <a href="{% url 'index' %}">AroundMe</a>
             </div>
             <div class="nav_side">
-                <a href="{% url 'events' %}">Local events</a>
-                <a href="{% url 'fundacje' %}">Organisations</a>
+                <a href="{% url 'events' %}" class="{% block events %}{% endblock events %}">Local events</a>
+                <a href="{% url 'fundacje' %}" class="{% block fundacje %}{% endblock fundacje %}">Organisations</a>
                 {% if  user.is_authenticated %}
-                <a href="{% url 'account' %}">Account</a>
+                <a href="{% url 'account' %}" class="outlineborder{% block account %}{% endblock account %}">Account</a>
                 {% else %}
-                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'login' %}" class="outlineborder{% block login %}{% endblock login %}">Login</a>
                 {% endif %}
             </div>
         </div>
