@@ -33,6 +33,11 @@ class FormUserRegistration(UserCreationForm):
             user.save()
         return user
     
+class UserUpdate(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['first_name', 'last_name', 'username', 'telefon', 'email', 'adres_zamieszkania', 'email', 'email', 'email']
+
 class FormOrganizationCreate(forms.ModelForm):
     class Meta:
         model = Organization
