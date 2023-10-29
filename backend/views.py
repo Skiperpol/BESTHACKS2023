@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from backend.forms import FormJedzenie, FormOrganizationCreate, FormPrzedmiot, FormUserRegistration, FormUsluga
+from backend.forms import FormJedzenie, FormOrganizationCreate, FormPrzedmiot, FormUserRegistration, FormUsluga, UserUpdate
 from django.template import loader
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.hashers import make_password
@@ -133,10 +133,17 @@ def fundacje(request):
 
 
 def account(request):
+    user_id = request.user.id
+
+    user = get_object_or_404(CustomUser, id=user_id)
+    form = UserUpdate(instance=user)
+
+
     template = loader.get_template("frontend/account.html")
     context = {
         "username": request.user.username,
         "rola": request.user.rola,
+        "form": form,
     }
     return HttpResponse(template.render(context, request))
 
@@ -188,7 +195,6 @@ def register(request):
         )
 
 def createUser(request):
-    print("1231231")
     firstName = request.POST['firstName']
     lastName = request.POST['lastName']
     username = request.POST['username']

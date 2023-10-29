@@ -5,9 +5,15 @@ active
 {% block content %}
 <div id="share-container">
     <div>
-    <div>Zalogowano jako {{ username }}</div>
-    <div>{{ rola }}</div>
-    <div class="mt10"><a href="{% url 'logout' %}" class="main_button" >Wyloguj</a></div>
+        <form method="post" id="update-food" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="main_button">Aktualizuj</button>
+            <div class="mt10"><a href="{% url 'logout' %}" class="main_button" style="background-color: rgb(153, 27, 27);">Wyloguj</a></div>
+        </form>
+    <!-- <div>Zalogowano jako {{ username }}</div>
+    <div>{{ rola }}</div> -->
+   
 </div>
 </div>  
 {% endblock content %}
