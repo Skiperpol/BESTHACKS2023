@@ -7,7 +7,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import logout
 
-from backend.models import CustomUser, Jedzenie, Organization, Przedmiot, Usluga
+from backend.models import CustomUser, Jedzenie, Organization, Przedmiot, Usluga, Event
 
 def is_admin(user):
     return user.is_superuser
@@ -101,9 +101,10 @@ def shareskills(request):
 
 
 def events(request):
+    events = Event.objects.all()
     template = loader.get_template("frontend/events.html")
     context = {
-        "lorem": "lorem",
+        "events": events,
     }
     return HttpResponse(template.render(context, request))
 

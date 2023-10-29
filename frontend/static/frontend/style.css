@@ -87,7 +87,7 @@ a {
     align-content: center;
     width: 28vw;
 }
-h3 {
+h3, h2 {
     letter-spacing: 2px;
     color: #34A853
 }
@@ -103,9 +103,64 @@ align-content: flex-start;
 #share-container {
     margin-top: 5vh;
     width: 100%;
+    
+}
+.eventscon {
+    margin-top: 10vh !important;
 }
 #map {
-    height: 50vh;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-top: 5vh;
+    height: 60vh;
+    width: 60%;
+    float: right;
+}
+#lista-wydarze-container {
+    width: 40%;
+    float: left;
+}
+.listmarker {
+    width: 7%;
+    margin-right: 1vw;
+}.marker {
+    width: 30px;      /* Width of the marker */
+    height: 30px;     /* Height of the marker */
+    background-image: url("https://htmlstream.com/preview/front-v3.2/assets/svg/components/map-pin.svg");
+    cursor: pointer; /* Add a pointer cursor on hover */
+}
+.inside {
+    overflow: hidden;
+    height: 0px;
+    transition: all 0.5s ease;
+    background-color: #fff;
+    width: 70%;
+    padding: 2vh 10% 2vh 10% ;
+}
+.openedElement {
+    height: 100px !important;
+}
+
+.openedElement {
+    height: 100px !important;
+}
+.list_event_name {
+    width: 80%;
+}
+.lista-wydarze-item {
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    width: 70%;
+    padding: 2vh 10% 0vh 10% ;
+    height: 50px;
+    display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: flex-start;
+align-items: center;
+align-content: center;
 }
 #org-container {
     margin-top: 5vh;
