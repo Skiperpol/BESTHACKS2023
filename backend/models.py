@@ -8,7 +8,7 @@ class Organization(models.Model):
     nazwa = models.CharField(max_length=50, blank=False)
     uzytkownik = models.CharField(max_length=100, blank=True)
     opis = models.CharField(max_length=500, blank=True)
-    logo = models.ImageField(upload_to='documents/', blank=True)
+    logo = models.ImageField(upload_to='documents/', blank=True, null=True)
 
 
 TITLE_CHOICES = [
@@ -28,8 +28,8 @@ class Event(models.Model):
     main_image = models.ImageField(upload_to='documents/')
     created_at = models.DateTimeField(auto_now_add=True)
     link_do_miejsca_wydarzenia =  models.URLField(max_length = 200, blank=True, null=True)
-    x_miejsca = models.FloatField(null=True)
-    y_miejsca = models.FloatField(null=True)
+    x_miejsca = models.FloatField(null=True, blank=True)
+    y_miejsca = models.FloatField(null=True, blank=True)
 
 
 class Image(models.Model):
@@ -46,6 +46,8 @@ class Jedzenie(models.Model):
     food_description = models.CharField(max_length=100, blank=True)
     food_image = models.ImageField(upload_to='documents/')
     created_at = models.DateTimeField(auto_now_add=True)
+    x_miejsca = models.FloatField(null=True, blank=True)
+    y_miejsca = models.FloatField(null=True, blank=True)
 
 class Przedmiot(models.Model):
     item_id = models.BigAutoField(primary_key=True)
@@ -54,6 +56,8 @@ class Przedmiot(models.Model):
     item_description = models.CharField(max_length=100, blank=True)
     item_image = models.ImageField(upload_to='documents/')
     created_at = models.DateTimeField(auto_now_add=True)
+    x_miejsca = models.FloatField(null=True, blank=True)
+    y_miejsca = models.FloatField(null=True, blank=True)
 
 class Usluga(models.Model):
     service_id = models.BigAutoField(primary_key=True)
@@ -63,6 +67,8 @@ class Usluga(models.Model):
     service_price = models.CharField(max_length=100, blank=True)
     service_image = models.ImageField(upload_to='documents/')
     created_at = models.DateTimeField(auto_now_add=True)
+    x_miejsca = models.FloatField(null=True, blank=True)
+    y_miejsca = models.FloatField(null=True, blank=True)
 
 
 ROLA = [

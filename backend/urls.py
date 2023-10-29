@@ -16,6 +16,11 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('organizacja_form/', organizacja_form, name='organizacja_form'),
     path('food_update/<foodId>', food_update, name='food_update'),
+    path('item_update/<itemId>', item_update, name='item_update'),
+    path('skill_update/<skillId>', skill_update, name='skill_update'),
+    path('check_food/<foodId>', check_food, name='check_food'),
+    path('check_skill/<skillId>', check_skill, name='check_skill'),
+    path('check_item/<itemId>', check_item, name='check_item'),
 
 
 

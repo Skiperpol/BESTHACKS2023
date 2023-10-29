@@ -236,6 +236,35 @@ def skill_update(request, skillId):
         template_name = "frontend/skill_update.html",
         context={"form":form, "skill_id":skill_id}
         )
+
+def check_food(request, foodId):
+    food = get_object_or_404(Jedzenie, food_id=foodId)
+
+    return render(
+        request = request,
+        template_name = "frontend/check_food.html",
+        context={"food":food}
+        )
+
+def check_item(request, itemId):
+    item = get_object_or_404(Przedmiot, item_id=itemId)
+
+    return render(
+        request = request,
+        template_name = "frontend/check_item.html",
+        context={"item":item}
+        )
+
+def check_skill(request, skillId):
+    skill = get_object_or_404(Usluga, service_id=skillId)
+
+    return render(
+        request = request,
+        template_name = "frontend/check_skill.html",
+        context={"skill":skill}
+        )
+
+
 # AJAX
 
 
