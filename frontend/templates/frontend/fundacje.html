@@ -9,8 +9,18 @@ active
         <a class="main_button" href="{% url 'organizacja_form' %}">Dodaj swoją organizacje</a>
     </div>
     <h3>Moje fundacje</h3>
-    {{twoje_organizacje}}
+    {% for org in twoje_organizacje %}
+        {{org.nazwa}}
+        {% if org.logo %}
+        <img src="{{ org.logo.url }}" alt="">
+        {% endif %}
+    {% endfor %}
     <h3>Pozostałe fundacje</h3>
-    {{inne_organizacje}}
+    {% for org in inne_organizacje %}
+        {{org.nazwa}}
+        {% if org.logo %}
+        <img src="{{ org.logo.url }}" alt="">
+        {% endif %}
+    {% endfor %}
 </div>
 {% endblock content %}

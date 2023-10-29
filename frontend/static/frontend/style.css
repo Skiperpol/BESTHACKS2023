@@ -17,6 +17,10 @@ a {
     align-items: center;
     align-content: center;
 }
+.f {
+    color: #34A853;
+    font-size: 1.4em;
+}
 #logo_div a{ 
     font-size: 1.4em;
     color: #34A853;
@@ -108,12 +112,51 @@ align-content: flex-start;
 .eventscon {
     margin-top: 10vh !important;
 }
+.floatleft {
+    width: 36%;
+    font-size: 1.3em;
+    line-height: 1.2em;
+    margin-top: 9vh;
+    position: relative;
+}
+.nomb {
+    margin-bottom: 1vh !important;
+    margin-top: 0vh !important;
+}
+.floatleft::before {
+    content: "";
+    position: absolute;
+    top: -4.9vh;
+    width: 100%;
+    z-index: -1;
+    height: 100%;
+    left: -3vw;
+    background-color: #d3e8c9;
+    padding: 6vh;
+    border-top-right-radius: 400px;
+    border-top-left-radius: 200px;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 300px;
+}
+
 #map {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     margin-top: 5vh;
     height: 60vh;
-    width: 60%;
+    width: 40vw;
     float: right;
+}
+#create-food, #create-item, #create-skills {
+    float: left;
+    width: 70%;
+    height: 37vh;
+}
+#map_form {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    height: 60vh;
+    width: 30%;
+    float: right;
+
 }
 #lista-wydarze-container {
     width: 40%;
@@ -184,7 +227,18 @@ align-content: flex-start;
     align-items: center;
     align-content: center;
 }
-
+.mt5 {
+    display: block;
+}
+.mt10 {
+    margin-top: 5vh;
+}
+.mt6 {
+    display: block;
+    float: left;
+    width: 40%;
+    margin-top: 8vh;
+}
 .main_button {
     width: fit-content;
     padding: 1vh 4vw 1vh 4vw;
@@ -194,7 +248,16 @@ align-content: flex-start;
     border: none;
     font-size: 1.1em;
     text-align: center;
+    transition: all .5s ease;
+    cursor: pointer;
+    pointer-events: auto;
+    z-index: 9;
 }
+.main_button:hover {
+    background-color: #34a85337 !important;
+
+}
+
 .outlineborder {
     border: 2px solid #34A853;
 }
@@ -229,6 +292,7 @@ align-content: flex-start;
     line-height: 1.4em;
 }
 #index-text-container {
+    margin-top: 1vh;
     float: left;
     width: fit-content;
 }
@@ -250,7 +314,8 @@ align-content: flex-start;
 }
 
 input {
-    width: calc(100% - 20px);
+    display: block;
+    width: calc(90% - 20px);
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -268,33 +333,30 @@ input:focus {
     justify-content: center;
     align-items: flex-start;
     align-content: flex-start;
-    padding: 2vh 2vw 2vh 2vw;
-    border: 2px solid #34a85337;
-    border-radius: 40px;
+    /* border: 2px solid #34a85337; */
     width: fit-content;
     float: left;
     margin-right: 1vw;
     margin-bottom: 1vh;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     color:#34A853;
     position: relative;
 }
 .default_card .img-card-container {
     height: 8vw;
     margin-bottom: 1vw;
-    width: 4vw;
-    border-radius: 80px;
+    width: 6vw;
+    border-radius: 3px;
+    overflow: hidden;
+    text-align: center;
 }
 .default_card .img-card-container img{ 
-    border-radius: 20px;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-position: center ;
+    object-fit: cover;
 }
 .cardtext {
-    position: absolute;
-    bottom: .5vh;
-    width: 4vw;
+    width: 100%;
     text-align: center;
 }
 

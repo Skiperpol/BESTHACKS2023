@@ -42,6 +42,10 @@ def sharefood(request):
         return render(request, 'frontend/sharefood.html', {'jedzenie': jedzenie, 'rola': rola})
     elif rola == 'WOLONTARIUSZ':
         form = FormJedzenie()
+        form.fields["food_name"].label = "Nazwa"
+        form.fields["food_description"].label = "Opis"
+        form.fields["food_name"].label = "Zdjęcie"
+        form.fields["food_name"].label = "Nazwa"
         dodane_jedzenie = user.jedzenie.all()
         return render(request, 'frontend/sharefood.html', {'form': form, 'rola': rola, 'dodane_jedzenie': dodane_jedzenie})
     else:
@@ -65,6 +69,10 @@ def shareitems(request):
         return render(request, 'frontend/shareitems.html', {'przedmiot': przedmiot, 'rola': rola})
     elif rola == 'WOLONTARIUSZ':
         form = FormPrzedmiot()
+        form.fields["item_name"].label = "Nazwa"
+        form.fields["item_description"].label = "Opis"
+        form.fields["item_image"].label = "Zdjęcie"
+        ['item_name', 'item_description', 'item_image']
         dodane_przedmioty = user.przedmiot.all()
         return render(request, 'frontend/shareitems.html', {'form': form, 'rola': rola, 'dodane_przedmioty': dodane_przedmioty})
     else:
@@ -88,6 +96,10 @@ def shareskills(request):
         return render(request, 'frontend/shareskills.html', {'usluga': usluga, 'rola': rola})
     elif rola == 'WOLONTARIUSZ':
         form = FormUsluga()
+        form.fields["service_name"].label = "Nazwa"
+        form.fields["service_description"].label = "Opis"
+        form.fields["service_price"].label = "Cena"
+        form.fields["service_image"].label = "Obraz"
         dodane_uslugi = user.usluga.all()
         return render(request, 'frontend/shareskills.html', {'form': form, 'rola': rola, 'dodane_uslugi':dodane_uslugi})
     else:
@@ -124,6 +136,7 @@ def account(request):
     template = loader.get_template("frontend/account.html")
     context = {
         "username": request.user.username,
+        "rola": request.user.rola,
     }
     return HttpResponse(template.render(context, request))
 

@@ -5,7 +5,7 @@ active
 {% block content %}
 <div id="share-container" class="eventscon">
 <div id="lista-wydarze-container">
-    <h2>Wydarzenie wokół mnie</h2>
+    <h2>Wydarzenia wokół mnie</h2>
     {% for event in events %}
     
     <div id="lista{{event.event_name}}" class="lista-wydarze-item">
@@ -15,7 +15,7 @@ active
     </div>
     <div class="inside" id="inside{{event.event_name}}">
         <br>
-        {{ event.event_date }}
+        <span class="green_text">{{ event.event_date }}</span>
         <br>
         {{ event.event_location }}
     </div>
