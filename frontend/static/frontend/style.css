@@ -38,6 +38,7 @@ a {
     height: 60vh;
 }
 .index-img { 
+    user-select: none;
     position: absolute;
     bottom: 0;
     object-fit: cover;
@@ -365,6 +366,7 @@ input:focus {
     height: 100%;
     object-position: center ;
     object-fit: cover;
+    border-radius: 30px;
 }
 .poor_card .img-card-container {
     height: 10vw;
