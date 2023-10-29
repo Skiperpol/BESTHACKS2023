@@ -9,18 +9,33 @@ active
         <a class="main_button" href="{% url 'organizacja_form' %}">Dodaj swoją organizacje</a>
     </div>
     <h3>Moje fundacje</h3>
+    <div>
     {% for org in twoje_organizacje %}
-        {{org.nazwa}}
-        {% if org.logo %}
-        <img src="{{ org.logo.url }}" alt="">
-        {% endif %}
+        <div class="found_card">
+            <div class="img-card-container">
+                {% if org.logo %}
+                <img src="{{ org.logo.url }}" alt="">
+                {% endif %}
+            </div>
+            {{ org.nazwa }}
+        </div>  
     {% endfor %}
+    </div>
     <h3>Pozostałe fundacje</h3>
+    <div>
     {% for org in inne_organizacje %}
-        {{org.nazwa}}
-        {% if org.logo %}
-        <img src="{{ org.logo.url }}" alt="">
-        {% endif %}
+    <div class="found_card">
+        <div class="img-card-container">
+            {% if org.logo %}
+            <img src="{{ org.logo.url }}" alt="">
+            {% endif %}
+        </div>
+        {{ org.nazwa }}
+    </div>  
     {% endfor %}
+    </div>
+   
 </div>
 {% endblock content %}
+
+default_card .img-card-container img
