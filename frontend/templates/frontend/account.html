@@ -3,6 +3,10 @@
 active
 {% endblock %}
 {% block content %}
-
-Zalogowano jako {{ username }}
+<div id="share-container">
+    <div>Zalogowano jako {{ username }}</div>
+    <div>{{ rola }}</div>
+    <div class="mt10"><a href="{% url 'logout' %}" class="main_button" >Wyloguj</a></div>
+    
+</div>  
 {% endblock content %}

@@ -13,12 +13,34 @@ active
 <form method="post" id="create-food" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="main_button">Submit</button>
+    <button type="submit" class="main_button">Dodaj</button>
 </form>
+<div id='map_form'></div>
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZmlsaXB0ZXN0IiwiYSI6ImNrd3V5NGg1dTF1c3UydHFvN3c2aWlteWkifQ.nNJT6_rY_loc_Wa_s01wSQ'; 
+    const map = new mapboxgl.Map({
+      container: 'map_form',
+      style: 'mapbox://styles/mapbox/streets-v12', 
+      center: [17.0385, 51.1079],
+      zoom: 10.5
+    });
+    var geolocate = new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        trackUserLocation: true
+    });
+    
+    
+    map.addControl(geolocate);
+    setTimeout(function() {
+    $(".mapboxgl-ctrl-geolocate").click();
+},1000);
+</script>
 {% if dodane_jedzenie %}
-    <h3>Moje podarowane posiłki </h3>
+    <h3 class="mt5">Moje podarowane posiłki </h3>
 {% else %}
-    <h3>Udostępnij posiłki już teraz, odkryj magie pomagania</h3>
+    <h3 class="mt5">Udostępnij posiłki już teraz, odkryj magie pomagania</h3>
 {% endif %}
 
     <div class="default_card_wrapper">

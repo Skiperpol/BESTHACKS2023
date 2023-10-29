@@ -10,23 +10,26 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
 </head>
-<body>
+<body id="body">
+    <div id='plama'></div>
     <div id="container">
         <div id="nav">
             <div class="nav_side">
-                <a href="{% url 'sharefood' %}" class="{% block sharefood %}{% endblock sharefood %}">ShareFood</a>
-                <a href="{% url 'shareitems' %}" class="{% block shareitems %}{% endblock shareitems %}">ShareItems</a>
-                <a href="{% url 'shareskills' %}" class="{% block shareskills %}{% endblock shareskills %}">ShareSkills</a>
+                <a href="{% url 'sharefood' %}" class="{% block sharefood %}{% endblock sharefood %}">Żywność</a>
+                <a href="{% url 'shareitems' %}" class="{% block shareitems %}{% endblock shareitems %}">Przedmioty</a>
+                <a href="{% url 'shareskills' %}" class="{% block shareskills %}{% endblock shareskills %}">Umiejętności</a>
             </div>
+            <a href="{% url 'index' %}">
             <div id="logo_div">
                 <img class="logo" src="{% static 'frontend/logo.jpg' %}" alt="">
-                <a href="{% url 'index' %}">AroundMe</a>
+                <span class="f">AroundMe</span>
             </div>
+            </a>
             <div class="nav_side">
-                <a href="{% url 'events' %}" class="{% block events %}{% endblock events %}">Local events</a>
-                <a href="{% url 'fundacje' %}" class="{% block fundacje %}{% endblock fundacje %}">Organisations</a>
+                <a href="{% url 'events' %}" class="{% block events %}{% endblock events %}">Wydarzenia</a>
+                <a href="{% url 'fundacje' %}" class="{% block fundacje %}{% endblock fundacje %}">Organizacje</a>
                 {% if  user.is_authenticated %}
-                <a href="{% url 'account' %}" class="outlineborder{% block account %}{% endblock account %}">Account</a>
+                <a href="{% url 'account' %}" class="outlineborder{% block account %}{% endblock account %}">Moje konto</a>
                 {% else %}
                 <a href="{% url 'login' %}" class="outlineborder{% block login %}{% endblock login %}">Login</a>
                 {% endif %}
@@ -37,7 +40,7 @@
     </div>
     <div id="footer">
         <div class="footer_text">
-            @2023 AroundMe
+            Drużyna: Szukamy Pracy - @2023 AroundMe
         </div>
     </div>
 </body>
