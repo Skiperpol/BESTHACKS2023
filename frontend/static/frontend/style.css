@@ -227,11 +227,11 @@ align-content: flex-start;
     align-items: center;
     align-content: center;
 }
+.potrzebujacy-cont {
+    width: 100%;
+}
 .mt5 {
     display: block;
-}
-.mt10 {
-    margin-top: 5vh;
 }
 .mt6 {
     display: block;

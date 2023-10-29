@@ -55,7 +55,22 @@ active
         </div>
     {% endfor %}
 </div>
-
+{% else %}
+<div class="potrzebujacy-cont">
+  <h3 class="mt10">Dostępne przedmioty</h3>
+  {% for dod in przedmiot %}
+    <div class="default_card">
+        <div class="img-card-container">
+            {% if dod.item_image %}
+            <img src="{{ dod.item_image.url }}" alt="">
+            {% else %}
+            <img src="{% static 'frontend/rzepa.jpg' %}" alt="">
+            {% endif %}
+        </div>
+        <div class="cardtext">{{dod.item_name}}</div>
+    </div>
+  {% endfor %}
+  </div>
 {% endif %}
 {% endif %}
 
