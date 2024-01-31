@@ -8,7 +8,9 @@ active
         <h3>Fundacje</h3>
         <a class="main_button" href="{% url 'organizacja_form' %}">Dodaj swoją organizacje</a>
     </div>
+    {% if twoje_organizacje %}
     <h3>Moje fundacje</h3>
+    {% endif %}
     <div>
     {% for org in twoje_organizacje %}
         <div class="found_card">
@@ -21,7 +23,7 @@ active
         </div>  
     {% endfor %}
     </div>
-    <h3>Pozostałe fundacje</h3>
+    <h3>Fundacje biorące udział w projekcie</h3>
     <div>
     {% for org in inne_organizacje %}
     <div class="found_card">

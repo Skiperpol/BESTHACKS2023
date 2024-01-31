@@ -36,7 +36,7 @@ class FormUserRegistration(UserCreationForm):
 class UserUpdate(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ['first_name', 'last_name', 'username', 'telefon', 'email', 'adres_zamieszkania', 'email', 'email', 'email']
+        fields = ['first_name', 'last_name', 'telefon', 'email', 'adres_zamieszkania', 'data_urodzenia']
 
 class FormOrganizationCreate(forms.ModelForm):
     class Meta:
